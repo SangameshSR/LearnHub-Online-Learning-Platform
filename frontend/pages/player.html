@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>LearnHub Player</title>
+
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #0f0f0f;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .video-side {
+        flex: 3;
+        background: black;
+      }
+
+      #player {
+        width: 100%;
+        height: 100%;
+      }
+
+      .sidebar {
+        width: 420px;
+        background: #181818;
+        border-left: 1px solid #333;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .sidebar-top {
+        padding: 22px;
+        border-bottom: 1px solid #333;
+      }
+
+      .sidebar-top h2 {
+        font-size: 24px;
+      }
+
+      .playlist {
+        flex: 1;
+        overflow-y: auto;
+      }
+
+      .video-card {
+        display: flex;
+        gap: 12px;
+        padding: 12px;
+        border-bottom: 1px solid #222;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .video-card:hover {
+        background: #252525;
+      }
+
+      .video-card.active {
+        background: #303030;
+        border-left: 5px solid #3498db;
+      }
+
+      .thumb {
+        width: 160px;
+        height: 90px;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+
+      .video-title {
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 1.4;
+      }
+
+      .bottom {
+        padding: 20px;
+        border-top: 1px solid #333;
+      }
+
+      .progress-bar {
+        width: 100%;
+        height: 14px;
+        background: #333;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-top: 12px;
+      }
+
+      .fill {
+        height: 100%;
+        background: #2ecc71;
+        width: 0%;
+        transition: 0.5s;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        border: none;
+        border-radius: 10px;
+        background: #3498db;
+        color: white;
+        margin-top: 20px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="video-side">
+      <div id="player"></div>
+    </div>
+
+    <div class="sidebar">
+      <div class="sidebar-top">
+        <h2>Course Playlist</h2>
+      </div>
+
+      <div class="playlist" id="playlist"></div>
+
+      <div class="bottom">
+        <h3 id="progressText">0% Completed</h3>
+
+        <div class="progress-bar">
+          <div class="fill" id="fill"></div>
+        </div>
+
+        <button class="btn" onclick="window.location.href = 'my-courses.html'">
+          Finish & Exit
+        </button>
+      </div>
+    </div>
+
+    <script src="../js/data.js"></script>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+
+      const courseId = parseInt(params.get("courseId"));
+
+      const course = COURSES_DATA.find((c) => c.id == courseId);
+
+      let player;
+
+      let playlist = [];
+
+      let progress =
+        parseInt(localStorage.getItem("progress_" + courseId)) || 0;
+
+      const totalLessons = course.totalLessons || 10;
+
+      function updateProgress() {
+        let pct = Math.round((progress / totalLessons) * 100);
+
+        if (pct > 100) {
+          pct = 100;
+        }
+
+        document.getElementById("fill").style.width = pct + "%";
+
+        document.getElementById("progressText").innerText = pct + "% Completed";
+      }
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("player", {
+          width: "100%",
+
+          height: "100%",
+
+          videoId: course.videoId,
+
+          playerVars: {
+            autoplay: 1,
+            rel: 0,
+            modestbranding: 1,
+          },
+
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+
+      function onPlayerReady() {
+        if (course.playlistId) {
+          player.loadPlaylist({
+            list: course.playlistId,
+          });
+        }
+
+        setTimeout(() => {
+          playlist = player.getPlaylist();
+
+          if (!playlist || playlist.length === 0) {
+            playlist = [course.videoId];
+          }
+
+          renderPlaylist();
+        }, 2000);
+
+        updateProgress();
+      }
+
+      function onPlayerStateChange(event) {
+        if (event.data === YT.PlayerState.ENDED) {
+          progress++;
+
+          if (progress > totalLessons) {
+            progress = totalLessons;
+          }
+
+          localStorage.setItem("progress_" + courseId, progress);
+
+          updateProgress();
+        }
+      }
+
+      function renderPlaylist() {
+        const container = document.getElementById("playlist");
+
+        container.innerHTML = "";
+
+        playlist.forEach((id, index) => {
+          container.innerHTML += `
+
+          <div
+            class="video-card"
+            onclick="playVideo(${index})"
+          >
+
+            <img
+              class="thumb"
+              src="https://img.youtube.com/vi/${id}/mqdefault.jpg"
+            />
+
+            <div class="video-title">
+
+              Lesson ${index + 1}
+
+            </div>
+
+          </div>
+
+        `;
+        });
+      }
+
+      function playVideo(index) {
+        if (player.getPlaylist()) {
+          player.playVideoAt(index);
+        }
+      }
+    </script>
+  </body>
+</html>

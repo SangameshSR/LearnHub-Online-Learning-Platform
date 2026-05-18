@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Course Certificate | LearnHub</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cinzel:wght@700&family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .cert-card {
+        width: 900px;
+        height: 650px;
+        background: white;
+        padding: 30px;
+        position: relative;
+        border: 20px solid #af9342;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+      .cert-inner {
+        border: 5px double #af9342;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 40px;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      .cert-header {
+        font-family: "Cinzel", serif;
+        color: #af9342;
+        font-size: 50px;
+        margin: 0;
+      }
+      .sub-header {
+        font-size: 20px;
+        color: #555;
+        margin-top: 10px;
+      }
+      .student-name {
+        font-family: "Dancing Script", cursive;
+        font-size: 60px;
+        color: #2c3e50;
+        margin: 30px 0;
+        border-bottom: 2px solid #ccc;
+        min-width: 400px;
+      }
+      .course-text {
+        font-size: 22px;
+        max-width: 600px;
+        line-height: 1.5;
+      }
+      .course-title {
+        font-weight: bold;
+        color: #af9342;
+        font-size: 28px;
+      }
+
+      .cert-footer {
+        margin-top: auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+      .sig-container {
+        text-align: center;
+        width: 250px;
+      }
+      .signature {
+        font-family: "Dancing Script", cursive;
+        font-size: 32px;
+        color: #2c3e50;
+        margin-bottom: -10px;
+      }
+      .sig-line {
+        border-top: 2px solid #333;
+        margin-top: 10px;
+        padding-top: 5px;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+      }
+      .managing-director {
+        font-size: 14px;
+        color: #777;
+      }
+      .print-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        background: #af9342;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      @media print {
+        .print-btn {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button class="print-btn" onclick="window.print()">
+      Download / Print Certificate
+    </button>
+
+    <div class="cert-card">
+      <div class="cert-inner">
+        <h1 class="cert-header">CERTIFICATE</h1>
+        <p class="sub-header">OF COURSE COMPLETION</p>
+
+        <p style="margin-top: 40px">This is to certify that</p>
+        <div class="student-name" id="displayStudentName">Name Loading...</div>
+
+        <p class="course-text">
+          has successfully completed all requirements for the professional
+          course
+        </p>
+        <div class="course-title" id="displayCourseTitle">
+          Course Title Loading...
+        </div>
+
+        <p>awarded on <span id="displayDate">May 11, 2026</span></p>
+
+        <div
+          class="cert-footer"
+          style="
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+          "
+        >
+          <div class="sig-container" style="text-align: center">
+            <div
+              style="
+                font-family: &quot;Dancing Script&quot;, cursive;
+                font-size: 24px;
+                color: #af9342;
+              "
+            >
+              Verified
+            </div>
+            <div
+              style="
+                border-top: 1px solid #333;
+                width: 200px;
+                padding-top: 5px;
+                font-weight: bold;
+              "
+            >
+              LearnHub Security
+            </div>
+          </div>
+
+          <div class="sig-container" style="text-align: center">
+            <div
+              style="
+                font-family: &quot;Dancing Script&quot;, cursive;
+                font-size: 30px;
+                color: #2c3e50;
+                margin-bottom: -5px;
+              "
+            >
+              Krishna R H
+            </div>
+            <div
+              style="
+                border-top: 1px solid #333;
+                width: 200px;
+                padding-top: 5px;
+                font-weight: bold;
+              "
+            >
+              Managing Director
+            </div>
+            <div style="font-size: 12px; color: #777">
+              LearnHub Technologies Pvt Ltd.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      document.getElementById("displayStudentName").textContent =
+        params.get("name") || "Student";
+      document.getElementById("displayCourseTitle").textContent =
+        params.get("course") || "Professional Development";
+      document.getElementById("displayDate").textContent =
+        new Date().toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+    </script>
+  </body>
+</html>
