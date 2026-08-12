@@ -73,4 +73,5 @@ public class AuthController {
                 "role", user.getRole().name()
         ));
     }
+    
 }
