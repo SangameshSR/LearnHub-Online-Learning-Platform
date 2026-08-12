@@ -1,173 +1,37 @@
-// ─────────────────────────────────────────────
-// home.js
-// ─────────────────────────────────────────────
-
+// Loads featured courses
 document.addEventListener("DOMContentLoaded", async () => {
-
-  const grid = document.getElementById("featuredCourses");
-
-  if (!grid) return;
-
-  // Loading State
-  grid.innerHTML = `
-    <div class="loading-placeholder">
-      Loading Courses...
-    </div>
-  `;
-
-  let enrolledIds = new Set();
-  let coursesToShow = [];
-
+  // render nav already called in app.js
+  const featuredEl = document.getElementById("featured-courses");
+  const coursesStat = document.getElementById("stat-courses");
+  const studentsStat = document.getElementById("stat-students");
   try {
-
-    // Timeout protection
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Request Timeout")), 5000)
-    );
-
-    // Backend API Fetch
-    const fetchPromise = fetch("http://localhost:8080/api/courses", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(async (res) => {
-
-      if (!res.ok) {
-        throw new Error(`HTTP Error: ${res.status}`);
-      }
-
-      return await res.json();
-    });
-
-    // Wait for API or timeout
-    const courses = await Promise.race([
-      fetchPromise,
-      timeoutPromise
-    ]);
-
-    console.log("Courses Loaded Successfully:", courses);
-
-    // Validate data
-    if (Array.isArray(courses) && courses.length > 0) {
-
-      // Show first 6 courses
-      coursesToShow = courses.slice(0, 6);
-
-      // Enrollment Check
-      if (window.Auth && typeof Auth.isLoggedIn === "function" && Auth.isLoggedIn()) {
-
-        try {
-
-          const token = localStorage.getItem("token");
-
-          const enrolledResponse = await fetch(
-            "http://localhost:8080/api/enrollments/my",
-            {
-              headers: {
-                Authorization: token ? `Bearer ${token}` : ""
-              }
-            }
-          );
-
-          if (enrolledResponse.ok) {
-
-            const enrolledCourses = await enrolledResponse.json();
-
-            enrolledCourses.forEach((e) => {
-              enrolledIds.add(e.courseId);
-            });
-          }
-
-        } catch (enrollError) {
-
-          console.warn("Enrollment fetch failed:", enrollError);
-        }
-      }
-
-    } else {
-
-      throw new Error("No courses available");
-    }
-
-  } catch (error) {
-
-    console.warn(
-      "Backend unavailable or failed. Using fallback static data.",
-      error
-    );
-
-    // Fallback Static Data
-    if (window.COURSES_DATA && COURSES_DATA.length > 0) {
-
-      coursesToShow = COURSES_DATA.slice(0, 6);
-
-    } else {
-
-      grid.innerHTML = `
-        <div class="loading-placeholder">
-          No courses found
-        </div>
-      `;
-
+    const res = await api.get("/courses");
+    if (!res.success) {
+      featuredEl.innerHTML = "<div class='muted'>Unable to load courses</div>";
       return;
     }
+    const courses = Array.isArray(res.data) ? res.data : (res.data && res.data.data) || [];
+    coursesStat.textContent = courses.length;
+    // try to count students across courses if field exists
+    let totalStudents = 0;
+    courses.forEach(c => { totalStudents += (c.students || 0); });
+    studentsStat.textContent = totalStudents || "—";
+    // show first 6 as featured
+    featuredEl.innerHTML = "";
+    courses.slice(0,6).forEach(c => {
+      const card = document.createElement("div");
+      card.className = "course-card";
+      card.innerHTML = `
+        <div class="title">${escapeHtml(c.title || c.name || "Untitled")}</div>
+        <div class="meta">${escapeHtml(c.category || "")} • ${escapeHtml(c.duration || "")}</div>
+        <div class="muted">${escapeHtml((c.description||"").slice(0,120))}...</div>
+        <div style="margin-top:8px"><a class="btn" href="pages/course-details.html?id=${c.id || c.courseId}">View course</a></div>
+      `;
+      featuredEl.appendChild(card);
+    });
+  } catch (e) {
+    console.error(e);
   }
-
-  // Render Courses
-  grid.innerHTML = coursesToShow.map((course) => `
-
-    <div class="course-card">
-
-      <div 
-        class="course-thumb"
-        style="
-          background:${course.color || 'linear-gradient(135deg,#00e5ff,#8b5cf6)'};
-        "
-      >
-
-        ${course.emoji || "📘"}
-
-      </div>
-
-      <div class="course-body">
-
-        <div class="course-category">
-          ${course.category || "General"}
-        </div>
-
-        <h3 class="course-title">
-          ${course.title || "Untitled Course"}
-        </h3>
-
-        <p class="course-desc">
-          ${course.description || "No description available"}
-        </p>
-
-      </div>
-
-      <div class="course-footer">
-
-        <span>
-          ⭐ ${course.rating || 0}
-        </span>
-
-        <button class="enroll-btn">
-
-          ${
-            enrolledIds.has(course.id)
-              ? "Enrolled"
-              : course.price && course.price > 0
-                ? `₹${course.price}`
-                : "Enroll Free"
-          }
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
 });
+
+function escapeHtml(s){ return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }

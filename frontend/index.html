@@ -1,294 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LearnHub – Level Up Your Skills</title>
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/home.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <nav class="navbar" id="navbar">
-      <div class="nav-inner">
-        <a href="index.html" class="logo">Learn<span>Hub</span></a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="pages/courses.html">Courses</a></li>
-          <li><a href="pages/my-courses.html">My Learning</a></li>
-          <li id="adminNavLink" style="display: none">
-            <a href="pages/admin.html">Admin</a>
-          </li>
-        </ul>
-        <div class="nav-actions">
-          <a href="pages/login.html" class="btn-outline" id="loginBtn"
-            >Sign In</a
-          >
-          <div class="user-menu hidden" id="userMenu">
-            <div class="user-avatar" id="userAvatarTrigger">
-              <div class="avatar-circle">
-                <span id="navUserInitial">U</span>
-              </div>
-              <span id="navUserName">User</span> ▾
-            </div>
-            <div class="user-dropdown" id="userDropdown">
-              <a href="pages/my-courses.html">📚 My Learning</a>
-              <a
-                href="pages/admin.html"
-                id="adminDropLink"
-                style="display: none"
-                >🛡 Admin Panel</a
-              >
-              <hr style="border-color: var(--border); margin: 4px 0" />
-              <button onclick="Auth.logout()">🚪 Sign Out</button>
-            </div>
-          </div>
-        </div>
-        <button class="hamburger" id="hamburger">
-          <span></span><span></span><span></span>
-        </button>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LearnHub — Home</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="nav">
+      <div class="nav-left">
+        <a href="/" class="logo">LearnHub</a>
+        <nav class="links">
+          <a href="index.html">Home</a>
+          <a href="pages/courses.html">Courses</a>
+          <a id="nav-my-learning" href="pages/my-learning.html">My Learning</a>
+        </nav>
       </div>
-    </nav>
+      <div class="nav-right" id="nav-auth-area">
+        <!-- populated by js/app.js -->
+      </div>
+    </header>
 
-    <section class="hero">
-      <div class="hero-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="grid-overlay"></div>
-      </div>
+    <main class="container hero">
       <div class="hero-content">
-        <div class="hero-tag">🚀 New courses added weekly</div>
-        <h1 class="hero-title">
-          Master New Skills.<br /><em>Build Your Future.</em>
-        </h1>
-        <p class="hero-subtitle">
-          Explore 500+ expert-led courses in tech, design, and more. Learn at
-          your pace with real-world projects.
-        </p>
-        <div class="hero-cta">
-          <a href="pages/courses.html" class="btn-hero-primary"
-            >Explore Courses</a
-          >
-          <a href="pages/my-courses.html" class="btn-hero-secondary"
-            >My Dashboard →</a
-          >
-        </div>
-        <div class="hero-stats">
-          <div class="stat"><strong>12K+</strong><span>Learners</span></div>
-          <div class="stat-divider"></div>
-          <div class="stat"><strong>500+</strong><span>Courses</span></div>
-          <div class="stat-divider"></div>
-          <div class="stat"><strong>98%</strong><span>Satisfaction</span></div>
+        <h1>Learn Skills. Build Projects. Grow Your Career.</h1>
+        <p class="lead">Curated developer courses. Project-based lessons. Real-world skills.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="pages/courses.html">Browse Courses</a>
+          <a class="btn ghost" href="pages/register.html">Get Started</a>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="floating-card card-1">
-          <div class="fc-icon">⚡</div>
-          <div>
-            <div class="fc-title">React Masterclass</div>
-            <div class="fc-sub">45 lessons · 12h</div>
-          </div>
+
+      <div class="hero-illustration">
+        <div class="card glass">
+          <h3>Featured Courses</h3>
+          <div id="featured-courses" class="course-grid"></div>
         </div>
-        <div class="floating-card card-2">
-          <div class="fc-icon">🎨</div>
-          <div>
-            <div class="fc-title">UI/UX Design</div>
-            <div class="fc-sub">32 lessons · 8h</div>
-          </div>
-        </div>
-        <div class="floating-card card-3">
-          <div class="fc-icon">☕</div>
-          <div>
-            <div class="fc-title">Java Spring Boot</div>
-            <div class="fc-sub">60 lessons · 18h</div>
-          </div>
-        </div>
-        <div class="hero-circle"></div>
+      </div>
+    </main>
+
+    <section class="container cards" id="home-stats">
+      <div class="stat">
+        <div class="stat-value" id="stat-courses">—</div>
+        <div class="stat-label">Courses</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-students">—</div>
+        <div class="stat-label">Students</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value" id="stat-instructors">—</div>
+        <div class="stat-label">Instructors</div>
       </div>
     </section>
 
-    <section class="categories-section">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h2>Browse by Category</h2>
-            <p>Find the perfect course for your goals</p>
-          </div>
-        </div>
-        <div class="categories-grid">
-          <a href="pages/courses.html?cat=Web Dev" class="cat-card"
-            ><span class="cat-icon">🌐</span
-            ><span class="cat-name">Web Dev</span
-            ><span class="cat-count">120 courses</span></a
-          >
-          <a href="pages/courses.html?cat=Java" class="cat-card"
-            ><span class="cat-icon">☕</span><span class="cat-name">Java</span
-            ><span class="cat-count">85 courses</span></a
-          >
-          <a href="pages/courses.html?cat=Design" class="cat-card"
-            ><span class="cat-icon">🎨</span><span class="cat-name">Design</span
-            ><span class="cat-count">64 courses</span></a
-          >
-          <a href="pages/courses.html?cat=Data Science" class="cat-card"
-            ><span class="cat-icon">📊</span
-            ><span class="cat-name">Data Science</span
-            ><span class="cat-count">97 courses</span></a
-          >
-          <a href="pages/courses.html?cat=Mobile Dev" class="cat-card"
-            ><span class="cat-icon">📱</span
-            ><span class="cat-name">Mobile Dev</span
-            ><span class="cat-count">52 courses</span></a
-          >
-          <a href="pages/courses.html?cat=DevOps" class="cat-card"
-            ><span class="cat-icon">🔧</span><span class="cat-name">DevOps</span
-            ><span class="cat-count">43 courses</span></a
-          >
-        </div>
-      </div>
-    </section>
-
-    <section class="featured-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Featured Courses</h2>
-          <a href="pages/courses.html" class="view-all">View all →</a>
-        </div>
-        <div class="courses-grid" id="featuredCourses">
-          <div class="loading-placeholder">Loading courses…</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="why-section">
-      <div class="container">
-        <div class="why-grid">
-          <div class="why-text">
-            <h2>Why Choose LearnHub?</h2>
-            <p>
-              We believe learning should be accessible, engaging, and
-              career-changing.
-            </p>
-            <div class="why-features">
-              <div class="why-feat">
-                <span class="why-icon">🏆</span>
-                <div>
-                  <strong>Expert Instructors</strong>
-                  <p>
-                    Learn from industry professionals with real-world
-                    experience.
-                  </p>
-                </div>
-              </div>
-              <div class="why-feat">
-                <span class="why-icon">⏱</span>
-                <div>
-                  <strong>Learn at Your Pace</strong>
-                  <p>Self-paced courses with lifetime access on all devices.</p>
-                </div>
-              </div>
-              <div class="why-feat">
-                <span class="why-icon">📜</span>
-                <div>
-                  <strong>Certificates</strong>
-                  <p>Earn verifiable certificates upon course completion.</p>
-                </div>
-              </div>
-              <div class="why-feat">
-                <span class="why-icon">🔄</span>
-                <div>
-                  <strong>Progress Tracking</strong>
-                  <p>Smart dashboards to track your learning journey.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="why-visual">
-            <div class="why-card">
-              <div class="why-card-header">📊 My Progress</div>
-              <div class="progress-mini-list">
-                <div class="pml-item">
-                  <span>React Fundamentals</span>
-                  <div class="pml-bar">
-                    <div class="pml-fill" style="width: 75%"></div>
-                  </div>
-                  <span>75%</span>
-                </div>
-                <div class="pml-item">
-                  <span>Java Spring</span>
-                  <div class="pml-bar">
-                    <div class="pml-fill" style="width: 45%"></div>
-                  </div>
-                  <span>45%</span>
-                </div>
-                <div class="pml-item">
-                  <span>CSS Mastery</span>
-                  <div class="pml-bar">
-                    <div class="pml-fill" style="width: 90%"></div>
-                  </div>
-                  <span>90%</span>
-                </div>
-              </div>
-              <div class="why-cert">🏅 Certificate earned: CSS Mastery</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-          <div class="footer-brand">
-            <div class="logo">Learn<span>Hub</span></div>
-            <p>Empowering learners worldwide with quality education.</p>
-          </div>
-          <div class="footer-links">
-            <strong>Platform</strong><a href="pages/courses.html">All Courses</a
-            ><a href="pages/my-courses.html">My Dashboard</a>
-          </div>
-          <div class="footer-links">
-            <strong>Account</strong><a href="pages/login.html">Sign In</a
-            ><a href="pages/login.html">Sign Up</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          © 2025 LearnHub. Built for learners, by learners.
-        </div>
-      </div>
+    <footer class="footer container">
+      <div>© LearnHub</div>
+      <div><a href="pages/profile.html">Profile</a> • <a href="pages/admin.html">Admin</a></div>
     </footer>
+  </div>
 
-    <script src="js/data.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/home.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Show admin links
-        if (Auth.isAdmin()) {
-          document.getElementById("adminNavLink").style.display = "";
-          const a = document.getElementById("adminDropLink");
-          if (a) a.style.display = "";
-        }
-        // User initial avatar
-        const user = Auth.getUser();
-        if (user) {
-          const init = document.getElementById("navUserInitial");
-          if (init) init.textContent = user.fullName.charAt(0).toUpperCase();
-        }
-        // Dropdown toggle
-        document
-          .getElementById("userAvatarTrigger")
-          ?.addEventListener("click", (e) => {
-            e.stopPropagation();
-            document.getElementById("userDropdown")?.classList.toggle("open");
-          });
-        document.addEventListener("click", () =>
-          document.getElementById("userDropdown")?.classList.remove("open"),
-        );
-      });
-    </script>
-  </body>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/home.js"></script>
+</body>
 </html>

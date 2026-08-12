@@ -1,268 +1,37 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>All Courses – LearnHub</title>
-    <link rel="stylesheet" href="../css/global.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      body {
-        padding-top: 80px;
-      }
-      .filter-bar {
-        padding: 32px 0;
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      .search-box {
-        flex: 1;
-        min-width: 260px;
-      }
-      .filter-chips {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 28px;
-      }
-      .chip {
-        padding: 7px 18px;
-        border-radius: 50px;
-        font-size: 0.82rem;
-        font-weight: 500;
-        border: 1.5px solid var(--border);
-        color: var(--text-muted);
-        cursor: pointer;
-        transition: var(--transition);
-        background: none;
-      }
-      .chip.active,
-      .chip:hover {
-        border-color: var(--primary);
-        color: var(--primary-lt);
-        background: rgba(108, 71, 255, 0.08);
-      }
-      .results-info {
-        color: var(--text-muted);
-        font-size: 0.88rem;
-        margin-bottom: 20px;
-      }
-      .page-hero em {
-        font-style: normal;
-        background: linear-gradient(135deg, var(--primary-lt), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar scrolled" id="navbar">
-      <div class="nav-inner">
-        <a href="../index.html" class="logo">Learn<span>Hub</span></a>
-        <ul class="nav-links" id="navLinks">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="courses.html" class="active">Courses</a></li>
-          <li><a href="my-courses.html">My Learning</a></li>
-          <li id="adminNavLink" style="display: none">
-            <a href="admin.html">Admin</a>
-          </li>
-        </ul>
-        <div class="nav-actions">
-          <a href="login.html" class="btn-outline" id="loginBtn">Sign In</a>
-          <div class="user-menu hidden" id="userMenu">
-            <div class="user-avatar" id="userAvatarTrigger">
-              <div class="avatar-circle">
-                <span id="navUserInitial">U</span>
-              </div>
-              <span id="navUserName">User</span> ▾
-            </div>
-            <div class="user-dropdown" id="userDropdown">
-              <a href="my-courses.html">📚 My Learning</a>
-              <a href="admin.html" id="adminDropLink" style="display: none"
-                >🛡 Admin Panel</a
-              >
-              <hr style="border-color: var(--border); margin: 4px 0" />
-              <button onclick="Auth.logout()">🚪 Sign Out</button>
-            </div>
-          </div>
-        </div>
-        <button class="hamburger" id="hamburger">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </nav>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Courses — LearnHub</title>
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/courses.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-left">
+      <a href="../index.html" class="logo">LearnHub</a>
+      <nav class="links">
+        <a href="../index.html">Home</a>
+        <a>Courses</a>
+      </nav>
+    </div>
+    <div class="nav-right" id="nav-auth-area"></div>
+  </header>
 
-    <header class="page-hero">
-      <div class="container">
-        <h1>Explore <em>All Courses</em></h1>
-        <p>Advance your career with industry-standard, expert-led courses.</p>
-      </div>
-    </header>
-
-    <section class="container">
-      <div class="filter-bar">
-        <div class="search-box">
-          <input
-            type="text"
-            class="form-input"
-            placeholder="🔍 Search courses…"
-            id="courseSearch"
-          />
-        </div>
-        <select class="form-select" style="width: 200px" id="levelFilter">
-          <option value="">All Levels</option>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
-
-      <div class="filter-chips" id="filterChips">
-        <button class="chip active" data-cat="">All</button>
-        <button class="chip" data-cat="Web Dev">Web Dev</button>
-        <button class="chip" data-cat="Java">Java</button>
-        <button class="chip" data-cat="Design">Design</button>
-        <button class="chip" data-cat="Data Science">Data Science</button>
-        <button class="chip" data-cat="Mobile Dev">Mobile Dev</button>
-        <button class="chip" data-cat="DevOps">DevOps</button>
-      </div>
-
-      <div class="results-info" id="resultsInfo"></div>
-      <div class="courses-grid" id="allCoursesGrid">
-        <div class="loading-placeholder">Loading courses…</div>
-      </div>
+  <main class="container">
+    <section class="filters glass">
+      <input id="search-input" placeholder="Search courses..." />
+      <select id="filter-category"><option value="">All categories</option></select>
+      <select id="filter-level"><option value="">All levels</option><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option></select>
+      <select id="sort-by"><option value="relevance">Sort: Relevance</option><option value="new">Newest</option><option value="popular">Most popular</option></select>
     </section>
 
-    <footer class="footer" style="margin-top: 60px">
-      <div class="container">
-        <div class="footer-bottom">© 2025 LearnHub</div>
-      </div>
-    </footer>
+    <section id="courses-list" class="course-grid"></section>
+  </main>
 
-    <script src="../js/data.js"></script>
-    <script src="../js/api.js?v=2"></script>
-    <script src="../js/app.js"></script>
-    <script>
-      let allCourses = [];
-      let enrolledIds = new Set();
-      let activeCategory = "";
-
-      // Read query param for category
-      const params = new URLSearchParams(window.location.search);
-      if (params.get("cat")) activeCategory = params.get("cat");
-
-      document.addEventListener("DOMContentLoaded", async () => {
-        // Auth UI extras
-        if (Auth.isAdmin()) {
-          document.getElementById("adminNavLink").style.display = "";
-          const a = document.getElementById("adminDropLink");
-          if (a) a.style.display = "";
-        }
-        const user = Auth.getUser();
-        if (user) {
-          const el = document.getElementById("navUserInitial");
-          if (el) el.textContent = user.fullName.charAt(0).toUpperCase();
-        }
-        document
-          .getElementById("userAvatarTrigger")
-          ?.addEventListener("click", (e) => {
-            e.stopPropagation();
-            document.getElementById("userDropdown")?.classList.toggle("open");
-          });
-        document.addEventListener("click", () =>
-          document.getElementById("userDropdown")?.classList.remove("open"),
-        );
-
-        // Get enrolled
-        if (Auth.isLoggedIn()) {
-          try {
-            const enrolled = await api.get("/enrollments/my");
-            enrolled.forEach((e) => enrolledIds.add(e.courseId));
-          } catch (_) {}
-        }
-
-        // Load courses
-        try {
-          const timeout = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("Timeout")), 2000)
-          );
-          const res = await Promise.race([api.get("/courses"), timeout]);
-          if (Array.isArray(res) && res.length > 0) {
-            allCourses = res;
-          } else {
-            throw new Error("Empty or invalid API response");
-          }
-        } catch (_) {
-          allCourses = COURSES_DATA.map((c) => ({
-            ...c,
-            totalLessons: c.lessons,
-          }));
-        }
-
-        // Set active chip from URL
-        if (activeCategory) {
-          document.querySelectorAll(".chip").forEach((c) => {
-            c.classList.toggle("active", c.dataset.cat === activeCategory);
-          });
-        }
-
-        renderCourses();
-      });
-
-      function renderCourses() {
-        let filtered = allCourses;
-        const search = document
-          .getElementById("courseSearch")
-          .value.toLowerCase();
-        const level = document.getElementById("levelFilter").value;
-
-        if (activeCategory)
-          filtered = filtered.filter((c) => c.category === activeCategory);
-        if (search)
-          filtered = filtered.filter(
-            (c) =>
-              c.title.toLowerCase().includes(search) ||
-              (c.description || "").toLowerCase().includes(search),
-          );
-        if (level) filtered = filtered.filter((c) => c.level === level);
-
-        document.getElementById("resultsInfo").textContent =
-          `Showing ${filtered.length} course${filtered.length !== 1 ? "s" : ""}`;
-        const grid = document.getElementById("allCoursesGrid");
-
-        if (!filtered.length) {
-          grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">🔍</div><h3>No courses found</h3><p>Try a different search or category.</p></div>`;
-          return;
-        }
-        grid.innerHTML = filtered
-          .map((c) => buildCourseCard(c, enrolledIds.has(c.id), "../"))
-          .join("");
-      }
-
-      // Chips
-      document.getElementById("filterChips").addEventListener("click", (e) => {
-        if (!e.target.classList.contains("chip")) return;
-        document
-          .querySelectorAll(".chip")
-          .forEach((c) => c.classList.remove("active"));
-        e.target.classList.add("active");
-        activeCategory = e.target.dataset.cat;
-        renderCourses();
-      });
-
-      let searchTimer;
-      document.getElementById("courseSearch").addEventListener("input", () => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(renderCourses, 300);
-      });
-      document
-        .getElementById("levelFilter")
-        .addEventListener("change", renderCourses);
-    </script>
-  </body>
+  <script src="../js/api.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/courses.js"></script>
+</body>
 </html>

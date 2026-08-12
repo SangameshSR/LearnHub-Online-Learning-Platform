@@ -1,0 +1,5 @@
+.filters{display:flex;gap:12px;padding:12px;margin-bottom:18px;align-items:center}
+.filters input, .filters select{padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.course-card{display:flex;flex-direction:column;gap:8px}
+.course-card .title{font-weight:600}
+.course-card .meta{font-size:13px;color:var(--muted)}

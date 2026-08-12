@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
-@EnableAsync // <-- Add this line
+@EnableAsync
 public class LearnHubApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(LearnHubApplication.class, args);
     }
 }
-

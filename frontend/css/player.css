@@ -1,0 +1,8 @@
+.player-layout{display:flex;gap:16px;align-items:flex-start}
+.video-pane{flex:2;padding:12px}
+.playlist-pane{width:320px;padding:12px}
+.playlist{list-style:none;padding:0;margin:0}
+.playlist li{padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;cursor:pointer}
+.playlist li.active{background:rgba(6,182,212,0.08);border-left:3px solid var(--accent)}
+.lesson-info{margin-top:12px;color:var(--muted)}
+@media (max-width:900px){ .player-layout{flex-direction:column} .playlist-pane{width:100%} }
