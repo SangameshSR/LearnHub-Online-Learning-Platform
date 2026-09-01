@@ -1,69 +1,826 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>LearnHub — Home</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
+  <title>LearnHub — Learn. Build. Grow.</title>
+
+  <meta
+    name="description"
+    content="LearnHub — project-based developer courses designed to build real-world skills."
+  />
+
   <link rel="stylesheet" href="css/global.css" />
   <link rel="stylesheet" href="css/home.css" />
 </head>
+
+
 <body>
+
   <div id="app">
+
+    <!-- =================================================
+         NAVIGATION
+    ================================================== -->
+
     <header class="nav">
+
       <div class="nav-left">
-        <a href="/" class="logo">LearnHub</a>
-        <nav class="links">
-          <a href="index.html">Home</a>
-          <a href="pages/courses.html">Courses</a>
-          <a id="nav-my-learning" href="pages/my-learning.html">My Learning</a>
+
+        <a
+          href="index.html"
+          class="logo"
+          aria-label="LearnHub Home"
+        >
+          <span class="logo-mark">L</span>
+          <span class="logo-text">LearnHub</span>
+        </a>
+
+
+        <nav
+          class="links"
+          aria-label="Main navigation"
+        >
+
+          <a
+            href="index.html"
+            class="active"
+          >
+            Home
+          </a>
+
+          <a href="pages/courses.html">
+            Courses
+          </a>
+
+          <a
+            id="nav-my-learning"
+            href="pages/my-learning.html"
+          >
+            My Learning
+          </a>
+
         </nav>
+
       </div>
-      <div class="nav-right" id="nav-auth-area">
-        <!-- populated by js/app.js -->
-      </div>
+
+
+      <!--
+        IMPORTANT:
+        js/app.js dynamically populates this area.
+        DO NOT REMOVE THIS ID.
+      -->
+
+      <div
+        class="nav-right"
+        id="nav-auth-area"
+        aria-label="Authentication area"
+      ></div>
+
     </header>
 
-    <main class="container hero">
-      <div class="hero-content">
-        <h1>Learn Skills. Build Projects. Grow Your Career.</h1>
-        <p class="lead">Curated developer courses. Project-based lessons. Real-world skills.</p>
-        <div class="hero-actions">
-          <a class="btn primary" href="pages/courses.html">Browse Courses</a>
-          <a class="btn ghost" href="pages/register.html">Get Started</a>
-        </div>
-      </div>
 
-      <div class="hero-illustration">
-        <div class="card glass">
-          <h3>Featured Courses</h3>
-          <div id="featured-courses" class="course-grid"></div>
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main>
+
+
+      <!-- =================================================
+           HERO SECTION
+      ================================================= -->
+
+      <section class="hero">
+
+        <div class="container hero-layout">
+
+
+          <!-- =================================================
+               HERO CONTENT
+          ================================================= -->
+
+          <div class="hero-content">
+
+            <div class="hero-badge">
+
+              <span class="badge-dot"></span>
+
+              Learn skills that actually matter
+
+            </div>
+
+
+            <h1>
+
+              Learn Skills.
+
+              <span class="hero-highlight">
+                Build Projects.
+              </span>
+
+              Grow Your Career.
+
+            </h1>
+
+
+            <p class="lead">
+
+              Master in-demand technology through practical,
+              project-based courses designed to help you build
+              real-world skills and become job-ready.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+              <a
+                class="btn primary"
+                href="pages/courses.html"
+              >
+                Explore Courses
+
+                <span class="btn-arrow">
+                  →
+                </span>
+
+              </a>
+
+
+              <a
+                class="btn ghost"
+                href="pages/register.html"
+              >
+                Get Started
+              </a>
+
+            </div>
+
+
+            <!-- Learning benefits -->
+
+            <div class="hero-features">
+
+              <div class="hero-feature">
+
+                <span class="feature-icon">
+                  ✓
+                </span>
+
+                <span>
+                  Project-based learning
+                </span>
+
+              </div>
+
+
+              <div class="hero-feature">
+
+                <span class="feature-icon">
+                  ✓
+                </span>
+
+                <span>
+                  Learn at your own pace
+                </span>
+
+              </div>
+
+
+              <div class="hero-feature">
+
+                <span class="feature-icon">
+                  ✓
+                </span>
+
+                <span>
+                  Career-focused skills
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               HERO VISUAL
+               
+               IMPORTANT:
+               This replaces the old fake "Your Learning"
+               progress card.
+          ================================================== -->
+
+          <div class="hero-illustration">
+
+            <div class="hero-glow glow-one"></div>
+
+            <div class="hero-glow glow-two"></div>
+
+
+            <!-- =================================================
+                 ANIMATED DEVELOPER VISUAL
+            ================================================== -->
+
+            <div class="developer-visual">
+
+
+              <!-- Animated orbit rings -->
+
+              <div class="orbit orbit-one"></div>
+
+              <div class="orbit orbit-two"></div>
+
+              <div class="orbit orbit-three"></div>
+
+
+              <!-- Floating technology badges -->
+
+              <div class="tech-badge badge-java">
+
+                <span>
+                  ☕
+                </span>
+
+                Java
+
+              </div>
+
+
+              <div class="tech-badge badge-spring">
+
+                <span>
+                  ◆
+                </span>
+
+                Spring
+
+              </div>
+
+
+              <div class="tech-badge badge-angular">
+
+                <span>
+                  △
+                </span>
+
+                Angular
+
+              </div>
+
+
+              <div class="tech-badge badge-sql">
+
+                <span>
+                  ▣
+                </span>
+
+                SQL
+
+              </div>
+
+
+              <!-- =================================================
+                   MAIN CODE WINDOW
+              ================================================== -->
+
+              <div class="code-window">
+
+
+                <!-- Window header -->
+
+                <div class="code-window-header">
+
+                  <div class="window-dots">
+
+                    <span></span>
+
+                    <span></span>
+
+                    <span></span>
+
+                  </div>
+
+
+                  <span class="window-title">
+                    learnhub.java
+                  </span>
+
+
+                  <span class="window-status">
+                    ● online
+                  </span>
+
+                </div>
+
+
+                <!-- Code -->
+
+                <div class="code-content">
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      01
+                    </span>
+
+                    <span class="code-keyword">
+                      class
+                    </span>
+
+                    <span class="code-class">
+                      Learning
+                    </span>
+
+                    <span>
+                      {
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      02
+                    </span>
+
+                    <span class="indent"></span>
+
+                    <span class="code-keyword">
+                      private
+                    </span>
+
+                    <span class="code-type">
+                      Skill
+                    </span>
+
+                    <span>
+                      skill;
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      03
+                    </span>
+
+                    <span class="indent"></span>
+
+                    <span class="code-keyword">
+                      void
+                    </span>
+
+                    <span class="code-method">
+                      buildProject
+                    </span>
+
+                    <span>
+                      () {
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      04
+                    </span>
+
+                    <span class="indent double"></span>
+
+                    <span class="code-text">
+                      learn();
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      05
+                    </span>
+
+                    <span class="indent double"></span>
+
+                    <span class="code-text">
+                      build();
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      06
+                    </span>
+
+                    <span class="indent double"></span>
+
+                    <span class="code-text">
+                      grow();
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      07
+                    </span>
+
+                    <span class="indent"></span>
+
+                    <span>
+                      }
+                    </span>
+
+                  </div>
+
+
+                  <div class="code-line">
+
+                    <span class="line-number">
+                      08
+                    </span>
+
+                    <span>
+                      }
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- Code footer -->
+
+                <div class="code-footer">
+
+                  <div class="code-progress">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                  </div>
+
+
+                  <span class="code-footer-text">
+                    Building real-world skills
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <!-- Small floating learning message -->
+
+              <div class="floating-learning-card">
+
+                <span class="floating-icon">
+                  ✦
+                </span>
+
+
+                <div>
+
+                  <strong>
+                    Learn → Build → Grow
+                  </strong>
+
+                  <span>
+                    Project-based learning
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 FEATURED COURSES
+                 
+                 IMPORTANT:
+                 js/home.js populates this element.
+            ================================================== -->
+
+            <div class="featured-card">
+
+
+              <div class="featured-header">
+
+                <div>
+
+                  <span class="eyebrow">
+                    LEARNHUB PICKS
+                  </span>
+
+                  <h3>
+                    Featured Courses
+                  </h3>
+
+                </div>
+
+
+                <a
+                  href="pages/courses.html"
+                >
+                  View all →
+                </a>
+
+              </div>
+
+
+              <!--
+                IMPORTANT:
+                js/home.js dynamically populates this.
+                DO NOT REMOVE THIS ID.
+              -->
+
+              <div
+                id="featured-courses"
+                class="course-grid"
+              ></div>
+
+            </div>
+
+          </div>
+
         </div>
-      </div>
+
+      </section>
+
+
+      <!-- =================================================
+           PLATFORM STATS
+           
+           IMPORTANT:
+           Existing IDs are preserved because home.js
+           updates these values.
+      ================================================== -->
+
+      <section
+        class="stats-section"
+        aria-label="LearnHub statistics"
+      >
+
+        <div class="container">
+
+          <div
+            class="cards"
+            id="home-stats"
+          >
+
+
+            <!-- Courses -->
+
+            <div class="stat">
+
+              <div class="stat-icon">
+                ◈
+              </div>
+
+
+              <div class="stat-content">
+
+                <div
+                  class="stat-value"
+                  id="stat-courses"
+                >
+                  —
+                </div>
+
+                <div class="stat-label">
+                  Courses
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Students -->
+
+            <div class="stat">
+
+              <div class="stat-icon">
+                ◉
+              </div>
+
+
+              <div class="stat-content">
+
+                <div
+                  class="stat-value"
+                  id="stat-students"
+                >
+                  —
+                </div>
+
+                <div class="stat-label">
+                  Students
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- Instructors -->
+
+            <div class="stat">
+
+              <div class="stat-icon">
+                ★
+              </div>
+
+
+              <div class="stat-content">
+
+                <div
+                  class="stat-value"
+                  id="stat-instructors"
+                >
+                  —
+                </div>
+
+                <div class="stat-label">
+                  Instructors
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =================================================
+           CALL TO ACTION
+      ================================================== -->
+
+      <section class="container cta-section">
+
+        <div class="cta-card">
+
+
+          <div class="cta-content">
+
+            <span class="eyebrow">
+              START LEARNING TODAY
+            </span>
+
+
+            <h2>
+              Turn your curiosity into real skills.
+            </h2>
+
+
+            <p>
+
+              Learn practical technologies, build meaningful
+              projects, and take the next step in your career.
+
+            </p>
+
+          </div>
+
+
+          <a
+            href="pages/courses.html"
+            class="btn primary"
+          >
+
+            Browse Courses
+
+            <span class="btn-arrow">
+              →
+            </span>
+
+          </a>
+
+        </div>
+
+      </section>
+
     </main>
 
-    <section class="container cards" id="home-stats">
-      <div class="stat">
-        <div class="stat-value" id="stat-courses">—</div>
-        <div class="stat-label">Courses</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-students">—</div>
-        <div class="stat-label">Students</div>
-      </div>
-      <div class="stat">
-        <div class="stat-value" id="stat-instructors">—</div>
-        <div class="stat-label">Instructors</div>
-      </div>
-    </section>
 
-    <footer class="footer container">
-      <div>© LearnHub</div>
-      <div><a href="pages/profile.html">Profile</a> • <a href="pages/admin.html">Admin</a></div>
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+      <div class="container footer-inner">
+
+
+        <div class="footer-brand">
+
+          <a
+            href="index.html"
+            class="logo"
+          >
+
+            <span class="logo-mark">
+              L
+            </span>
+
+            <span class="logo-text">
+              LearnHub
+            </span>
+
+          </a>
+
+
+          <p>
+            Learn skills. Build projects. Grow your career.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="index.html">
+            Home
+          </a>
+
+          <a href="pages/courses.html">
+            Courses
+          </a>
+
+          <a href="pages/my-learning.html">
+            My Learning
+          </a>
+
+          <a href="pages/profile.html">
+            Profile
+          </a>
+
+          <a href="pages/admin.html">
+            Admin
+          </a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          <span>
+            © LearnHub
+          </span>
+
+          <span>
+            Built for learners who want to build.
+          </span>
+
+        </div>
+
+      </div>
+
     </footer>
+
   </div>
 
+
+  <!-- =================================================
+       JAVASCRIPT
+       DO NOT CHANGE
+  ================================================== -->
+
   <script src="js/api.js"></script>
+
   <script src="js/app.js"></script>
+
   <script src="js/home.js"></script>
+
 </body>
+
 </html>
