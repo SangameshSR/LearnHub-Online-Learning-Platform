@@ -2,27 +2,263 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
   <title>Course Details — LearnHub</title>
+
+  <meta
+    name="description"
+    content="View course details, curriculum and start learning with LearnHub."
+  />
+
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="../css/courses.css" />
 </head>
-<body>
-  <header class="nav">
-    <div class="nav-left">
-      <a href="../index.html" class="logo">LearnHub</a>
-      <nav class="links"><a href="../index.html">Home</a><a href="courses.html">Courses</a></nav>
-    </div>
-    <div class="nav-right" id="nav-auth-area"></div>
-  </header>
 
-  <main class="container course-detail">
-    <div id="course-card" class="card glass"></div>
-    <aside id="course-actions" class="card glass"></aside>
-  </main>
+<body>
+
+  <div id="app">
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <header class="nav">
+
+      <div class="nav-left">
+
+        <a
+          href="../index.html"
+          class="logo"
+          aria-label="LearnHub Home"
+        >
+          <span class="logo-mark">L</span>
+          <span class="logo-text">LearnHub</span>
+        </a>
+
+        <nav
+          class="links"
+          aria-label="Main navigation"
+        >
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a
+            href="courses.html"
+            class="active"
+          >
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+        </nav>
+
+      </div>
+
+      <!-- Populated by js/app.js -->
+      <div
+        class="nav-right"
+        id="nav-auth-area"
+        aria-label="Authentication area"
+      ></div>
+
+    </header>
+
+
+    <!-- =========================
+         COURSE DETAIL PAGE
+    ========================== -->
+
+    <main class="course-detail-page">
+
+      <!-- Breadcrumb -->
+      <div class="container course-breadcrumb">
+
+        <a href="../index.html">
+          Home
+        </a>
+
+        <span>›</span>
+
+        <a href="courses.html">
+          Courses
+        </a>
+
+        <span>›</span>
+
+        <span class="breadcrumb-current">
+          Course Details
+        </span>
+
+      </div>
+
+
+      <!-- Main Course Area -->
+      <section class="container course-detail">
+
+        <!-- Main course information -->
+        <div
+          id="course-card"
+          class="card glass"
+        ></div>
+
+
+        <!-- Course actions -->
+        <aside
+          id="course-actions"
+          class="card glass"
+          aria-label="Course actions"
+        ></aside>
+
+      </section>
+
+
+      <!-- Supporting Information -->
+      <section class="container course-info-section">
+
+        <div class="course-info-grid">
+
+          <div class="info-item">
+
+            <span class="info-icon">
+              ✓
+            </span>
+
+            <div>
+              <strong>
+                Practical learning
+              </strong>
+
+              <span>
+                Focus on real skills and projects
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-icon">
+              ◈
+            </span>
+
+            <div>
+              <strong>
+                Learn at your pace
+              </strong>
+
+              <span>
+                Study whenever it works for you
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="info-item">
+
+            <span class="info-icon">
+              ★
+            </span>
+
+            <div>
+              <strong>
+                Career focused
+              </strong>
+
+              <span>
+                Build knowledge you can use
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+      <div class="container footer-inner">
+
+        <div class="footer-brand">
+
+          <a
+            href="../index.html"
+            class="logo"
+          >
+            <span class="logo-mark">L</span>
+            <span class="logo-text">LearnHub</span>
+          </a>
+
+          <p>
+            Learn skills. Build projects. Grow your career.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a href="courses.html">
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+
+          <a href="profile.html">
+            Profile
+          </a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          <span>
+            © LearnHub
+          </span>
+
+          <span>
+            Practical learning for real-world growth.
+          </span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       DO NOT REMOVE
+  ========================== -->
 
   <script src="../js/api.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/course-details.js"></script>
+
 </body>
 </html>
