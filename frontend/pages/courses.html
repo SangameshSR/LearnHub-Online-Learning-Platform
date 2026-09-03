@@ -2,36 +2,388 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Courses — LearnHub</title>
+
+  <meta
+    name="description"
+    content="Explore project-based technology courses on LearnHub."
+  />
+
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="../css/courses.css" />
 </head>
+
 <body>
-  <header class="nav">
-    <div class="nav-left">
-      <a href="../index.html" class="logo">LearnHub</a>
-      <nav class="links">
-        <a href="../index.html">Home</a>
-        <a>Courses</a>
-      </nav>
-    </div>
-    <div class="nav-right" id="nav-auth-area"></div>
-  </header>
 
-  <main class="container">
-    <section class="filters glass">
-      <input id="search-input" placeholder="Search courses..." />
-      <select id="filter-category"><option value="">All Categories</option></select>
-      <select id="filter-level"><option value="">All levels</option><option value="Beginner">Beginner</option><option value="Intermediate">Intermediate</option><option value="Advanced">Advanced</option></select>
-      <select id="sort-by"><option value="relevance">Sort: Relevance</option><option value="new">Newest</option><option value="popular">Most popular</option></select>
-    </section>
+  <div id="app">
 
-    <section id="courses-list" class="course-grid"></section>
-  </main>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <header class="nav">
+
+      <div class="nav-left">
+
+        <a
+          href="../index.html"
+          class="logo"
+          aria-label="LearnHub Home"
+        >
+          <span class="logo-mark">L</span>
+          <span class="logo-text">LearnHub</span>
+        </a>
+
+        <nav
+          class="links"
+          aria-label="Main navigation"
+        >
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a href="courses.html" class="active">
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+        </nav>
+
+      </div>
+
+      <!-- Populated by js/app.js -->
+      <div
+        class="nav-right"
+        id="nav-auth-area"
+        aria-label="Authentication area"
+      ></div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+    <main>
+
+      <!-- =========================
+           COURSE HERO
+      ========================== -->
+      <section class="courses-hero">
+
+        <div class="container">
+
+          <div class="courses-hero-content">
+
+            <span class="eyebrow">
+              LEARN. BUILD. MASTER.
+            </span>
+
+            <h1>
+              Explore courses that
+              <span>move your career forward.</span>
+            </h1>
+
+            <p>
+              Learn practical technologies through structured,
+              project-focused courses designed for real-world skills.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           COURSE EXPLORER
+      ========================== -->
+      <section class="container courses-section">
+
+        <div class="courses-heading">
+
+          <div>
+            <span class="section-label">
+              COURSE LIBRARY
+            </span>
+
+            <h2>
+              Find your next skill
+            </h2>
+
+            <p>
+              Search, filter and explore courses based on your goals.
+            </p>
+          </div>
+
+          <div class="course-count-badge">
+            <span class="count-dot"></span>
+            Learn at your own pace
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             FILTER BAR
+        ========================== -->
+        <section
+          class="filters glass"
+          aria-label="Course filters"
+        >
+
+          <div class="filter-search">
+
+            <span
+              class="filter-icon"
+              aria-hidden="true"
+            >
+              ⌕
+            </span>
+
+            <!-- IMPORTANT: keep this ID -->
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search courses..."
+              autocomplete="off"
+            />
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label for="filter-category">
+              Category
+            </label>
+
+            <!-- IMPORTANT: keep this ID -->
+            <select id="filter-category">
+              <option value="">
+                All Categories
+              </option>
+            </select>
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label for="filter-level">
+              Level
+            </label>
+
+            <!-- IMPORTANT: keep this ID -->
+            <select id="filter-level">
+
+              <option value="">
+                All levels
+              </option>
+
+              <option value="Beginner">
+                Beginner
+              </option>
+
+              <option value="Intermediate">
+                Intermediate
+              </option>
+
+              <option value="Advanced">
+                Advanced
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="filter-group">
+
+            <label for="sort-by">
+              Sort by
+            </label>
+
+            <!-- IMPORTANT: keep this ID -->
+            <select id="sort-by">
+
+              <option value="relevance">
+                Relevance
+              </option>
+
+              <option value="new">
+                Newest
+              </option>
+
+              <option value="popular">
+                Most popular
+              </option>
+
+            </select>
+
+          </div>
+
+        </section>
+
+
+        <!-- =========================
+             COURSE RESULTS HEADER
+        ========================== -->
+        <div class="results-header">
+
+          <div class="results-title">
+            <span class="results-accent"></span>
+
+            <span>
+              Available Courses
+            </span>
+          </div>
+
+          <div class="results-helper">
+            Choose a course and start learning
+          </div>
+
+        </div>
+
+
+        <!-- =========================
+             COURSE LIST
+        ========================== -->
+
+        <!-- IMPORTANT:
+             js/courses.js populates this element.
+             Keep this ID unchanged.
+        -->
+        <section
+          id="courses-list"
+          class="course-grid"
+          aria-live="polite"
+        ></section>
+
+      </section>
+
+
+      <!-- =========================
+           BOTTOM CTA
+      ========================== -->
+      <section class="container course-cta-section">
+
+        <div class="course-cta">
+
+          <div class="cta-decoration">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="course-cta-content">
+
+            <span class="eyebrow">
+              KEEP GROWING
+            </span>
+
+            <h2>
+              Your next project starts with the right skill.
+            </h2>
+
+            <p>
+              Explore practical courses, build your knowledge,
+              and turn learning into something you can actually use.
+            </p>
+
+          </div>
+
+          <a
+            href="../index.html"
+            class="btn ghost"
+          >
+            Back to Home
+            <span class="btn-arrow">→</span>
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="footer">
+
+      <div class="container footer-inner">
+
+        <div class="footer-brand">
+
+          <a
+            href="../index.html"
+            class="logo"
+          >
+            <span class="logo-mark">L</span>
+            <span class="logo-text">LearnHub</span>
+          </a>
+
+          <p>
+            Practical learning for real-world growth.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a href="courses.html">
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+
+          <a href="profile.html">
+            Profile
+          </a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          <span>
+            © LearnHub
+          </span>
+
+          <span>
+            Learn today. Build tomorrow.
+          </span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- =========================
+       JAVASCRIPT
+       DO NOT REMOVE
+  ========================== -->
 
   <script src="../js/api.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/courses.js"></script>
+
 </body>
 </html>
