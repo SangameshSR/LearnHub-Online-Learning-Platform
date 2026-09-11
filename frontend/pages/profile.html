@@ -1,31 +1,342 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  />
+
   <title>Profile — LearnHub</title>
+
+  <meta
+    name="description"
+    content="Manage your LearnHub profile and account information."
+  />
+
   <link rel="stylesheet" href="../css/global.css" />
   <link rel="stylesheet" href="../css/dashboard.css" />
 </head>
 
-  
-<body>
-  <header class="nav">
-    <div class="nav-left">
-      <a href="../index.html" class="logo">LearnHub</a>
-    </div>
-    <div class="nav-right" id="nav-auth-area"></div>
-  </header>
-  <main class="container">
-    <div class="card glass" id="profile-card">
-      <h2>Profile</h2>
-      <div id="profile-details"></div>
-    </div>
-  </main>
 
-  
+<body>
+
+  <div id="app">
+
+    <!-- ============================================
+         NAVIGATION
+    ============================================= -->
+
+    <header class="nav">
+
+      <div class="nav-left">
+
+        <a
+          href="../index.html"
+          class="logo"
+          aria-label="LearnHub Home"
+        >
+          <span class="logo-mark">L</span>
+          <span class="logo-text">LearnHub</span>
+        </a>
+
+        <nav
+          class="links"
+          aria-label="Main navigation"
+        >
+
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a href="courses.html">
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+
+          <a href="profile.html" class="active">
+            Profile
+          </a>
+
+        </nav>
+
+      </div>
+
+
+      <!-- Populated by app.js -->
+      <div
+        class="nav-right"
+        id="nav-auth-area"
+        aria-label="Authentication area"
+      ></div>
+
+    </header>
+
+
+    <!-- ============================================
+         PROFILE PAGE
+    ============================================= -->
+
+    <main class="profile-page">
+
+      <!-- Profile hero -->
+      <section class="profile-hero">
+
+        <div class="container profile-hero-inner">
+
+          <div class="profile-heading">
+
+            <span class="eyebrow">
+              ACCOUNT CENTER
+            </span>
+
+            <h1>
+              Your Profile
+            </h1>
+
+            <p>
+              Manage your LearnHub account information and
+              keep your learning journey organized.
+            </p>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ============================================
+           PROFILE CONTENT
+      ============================================= -->
+
+      <section class="container profile-content">
+
+        <div class="profile-layout">
+
+
+          <!-- Profile Card -->
+
+          <section
+            class="card glass profile-card"
+            id="profile-card"
+          >
+
+            <div class="profile-card-header">
+
+              <div class="profile-avatar">
+                <span>
+                  L
+                </span>
+              </div>
+
+              <div class="profile-card-title">
+
+                <span class="section-label">
+                  ACCOUNT DETAILS
+                </span>
+
+                <h2>
+                  Profile
+                </h2>
+
+                <p>
+                  Your LearnHub account information
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="profile-divider"></div>
+
+
+            <!--
+              IMPORTANT:
+              profile.js dynamically populates this element.
+
+              Keep this ID unchanged.
+            -->
+            <div
+              id="profile-details"
+              class="profile-details"
+            ></div>
+
+          </section>
+
+
+          <!-- Profile Side Panel -->
+
+          <aside class="profile-side">
+
+            <div class="profile-side-card">
+
+              <div class="side-icon">
+                ✓
+              </div>
+
+              <div>
+
+                <h3>
+                  Your account
+                </h3>
+
+                <p>
+                  Keep your information up to date
+                  for a better learning experience.
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="profile-side-card">
+
+              <div class="side-icon">
+                ◈
+              </div>
+
+              <div>
+
+                <h3>
+                  Learning journey
+                </h3>
+
+                <p>
+                  Continue exploring courses and
+                  build practical technology skills.
+                </p>
+
+                <a
+                  href="my-learning.html"
+                  class="side-link"
+                >
+                  View My Learning →
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="profile-side-card">
+
+              <div class="side-icon">
+                ★
+              </div>
+
+              <div>
+
+                <h3>
+                  Keep growing
+                </h3>
+
+                <p>
+                  Discover new courses and keep
+                  progressing toward your goals.
+                </p>
+
+                <a
+                  href="courses.html"
+                  class="side-link"
+                >
+                  Explore Courses →
+                </a>
+
+              </div>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ============================================
+         FOOTER
+    ============================================= -->
+
+    <footer class="footer">
+
+      <div class="container footer-inner">
+
+        <div class="footer-brand">
+
+          <a
+            href="../index.html"
+            class="logo"
+          >
+            <span class="logo-mark">L</span>
+            <span class="logo-text">LearnHub</span>
+          </a>
+
+          <p>
+            Learn skills. Build projects. Grow your career.
+          </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+          <a href="../index.html">
+            Home
+          </a>
+
+          <a href="courses.html">
+            Courses
+          </a>
+
+          <a href="my-learning.html">
+            My Learning
+          </a>
+
+          <a href="profile.html">
+            Profile
+          </a>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+          <span>
+            © LearnHub
+          </span>
+
+          <span>
+            Learn today. Build tomorrow.
+          </span>
+
+        </div>
+
+      </div>
+
+    </footer>
+
+  </div>
+
+
+  <!-- ============================================
+       JAVASCRIPT
+       DO NOT REMOVE
+  ============================================= -->
+
   <script src="../js/api.js"></script>
   <script src="../js/app.js"></script>
   <script src="../js/profile.js"></script>
+
 </body>
+
 </html>
